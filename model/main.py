@@ -1,7 +1,7 @@
 import consumer
 from shopping_environment import ShoppingEnvironment
-import random
 import pandas as pd
+from mechanisms import run_lottery_no_gaming
 
 # parameters
 num_shoes        = 100
@@ -39,15 +39,5 @@ influencer_consumers = [consumer.InfluencerConsumer(env) for _ in range(num_infl
 reseller_consumers   = [consumer.ResellerConsumer(env) for _ in range(num_resellers)]
 
 consumers = average_consumers + abnormal_consumers + special_consumers + wealthy_consumers + influencer_consumers + reseller_consumers
-
-# basic lottery system
-def run_lottery_no_gaming(consumers):
-    selected = random.sample(consumers, 100)
-
-    for person in selected:
-        person.buy_shoes()
-
-    fields = ['desire', 'identity', 'shoes_acquired']
-    return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in consumers])
 
 print(run_lottery_no_gaming(consumers))
