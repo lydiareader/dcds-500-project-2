@@ -17,9 +17,9 @@ class Consumer:
         self.shoes_acquired = 0
 
 
-    def buy_shoes(self):
-        if self.env.num_shoes >= 1:
-            self._buy_shoes(1)
+    def buy_shoes(self, cap):
+        self._buy_shoes(min(cap, self.num_shoes_want, self.env.num_shoes))
+        #TODO: incorporate money
 
 
     def _buy_shoes(self, num_to_buy):
@@ -44,9 +44,9 @@ class SpecialConsumer(Consumer):
         self.num_shoes_want = 2
         self.identity       = "special"
 
-    def buy_shoes(self):
+    def buy_shoes(self, cap):
         # special consumer will not buy 1 pair, only 2 pairs
-        if self.env.num_shoes >= 2 and self.money > self.env.price:
+        if self.env.num_shoes >= 2:     #TODO: incorporate money
             self._buy_shoes(2)
 
 
