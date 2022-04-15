@@ -13,7 +13,7 @@ class Consumer:
         self.num_shoes_want = 1 if random() < self.env.desire_threshold else 2
         self.money          = normal(self.env.average_mean_money, self.env.average_std_money)
         self.identity       = "average"
-        self.has_loyalty    = False
+        self.has_loyalty    = random() < self.env.average_prob_loyal
 
     def printdesire(self):
         print(self.desire)
@@ -32,3 +32,9 @@ class AbnormalConsumer(Consumer):
 class SpecialConsumer(Consumer):
     def __init__(self):
         self.num_shoes_want = 2
+
+
+class WealthyConsumer(Consumer):
+    def __init__(self):
+        self.money = normal(self.env.rich_mean_money, self.env.rich_std_money)
+        self.has_loyalty = random() < self.env.rich_prob_loyal
