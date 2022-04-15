@@ -26,7 +26,8 @@ env = ShoppingEnvironment(
     average_prob_loyal = 0.5,
     rich_prob_loyal = 0.8,
     reseller_prob_loyal = 0.9,
-    num_shoes = num_shoes
+    num_shoes = num_shoes,
+    price = 250
 )
 
 # create consumers
@@ -49,3 +50,4 @@ def run_lottery_no_gaming(consumers):
     fields = ['desire', 'identity', 'shoes_acquired']
     return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in consumers])
 
+print(run_lottery_no_gaming(consumers))

@@ -16,9 +16,15 @@ class Consumer:
         self.has_loyalty    = random() < self.env.average_prob_loyal
         self.shoes_acquired = 0
 
+
     def buy_shoes(self):
-        self.env.num_shoes = self.env.num_shoes - 1
-        self.shoes_acquired = 1
+        if self.env.num_shoes >= 1:
+            self._buy_shoes(1)
+
+
+    def _buy_shoes(self, num_to_buy):
+        self.env.num_shoes = self.env.num_shoes - num_to_buy
+        self.shoes_acquired += num_to_buy
 
 
 class AverageConsumer(Consumer):
@@ -37,6 +43,11 @@ class SpecialConsumer(Consumer):
         Consumer.__init__(self, env)
         self.num_shoes_want = 2
         self.identity       = "special"
+
+    def buy_shoes(self):
+        # special consumer will not buy 1 pair, only 2 pairs
+        if self.env.num_shoes >= 2 and self.money > self.env.price:
+            self._buy_shoes(2)
 
 
 class WealthyConsumer(Consumer):
