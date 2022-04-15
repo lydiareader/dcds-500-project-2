@@ -16,10 +16,6 @@ class Consumer:
         self.has_loyalty    = random() < self.env.average_prob_loyal
         self.shoes_acquired = 0
 
-    def printdesire(self):
-        print(self.desire)
-
-    
     def buy_shoes(self):
         self.env.num_shoes = self.env.num_shoes - 1
         self.shoes_acquired = 1
