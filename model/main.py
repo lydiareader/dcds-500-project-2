@@ -34,4 +34,7 @@ wealthy_consumers    = [consumer.WealthyConsumer(env) for _ in range(num_wealthy
 influencer_consumers = [consumer.InfluencerConsumer(env) for _ in range(num_influencers)]
 reseller_consumers   = [consumer.ResellerConsumer(env) for _ in range(num_resellers)]
 
+consumers = average_consumers + abnormal_consumers + special_consumers + wealthy_consumers + influencer_consumers + reseller_consumers
+print(type(consumers))
+
 
