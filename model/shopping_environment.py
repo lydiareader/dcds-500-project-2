@@ -1,0 +1,12 @@
+# environment for simulation
+
+
+class ShoppingEnvironment():
+    def __init__(self, desire_threshold, average_mean_money, average_std_money, rich_mean_money, average_prob_loyal, rich_prob_loyal, reseller_prob_loyal):
+        self.desire_threshold = desire_threshold
+        self.average_mean_money = average_mean_money
+        self.average_std_money = average_std_money
+        self.rich_mean_money = rich_mean_money
+        self.average_prob_loyal = average_prob_loyal
+        self.rich_prob_loyal = rich_prob_loyal
+        self.reseller_prob_loyal = reseller_prob_loyal
