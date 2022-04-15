@@ -3,6 +3,8 @@ from shopping_environment import ShoppingEnvironment
 
 
 env = ShoppingEnvironment(
+    mean_desire = 0.5,
+    std_desire = 0.2,
     desire_threshold = 0.7,
     average_mean_money = 250,
     average_std_money = 15,
