@@ -24,31 +24,36 @@ class AverageConsumer(Consumer):
 
 
 class AbnormalConsumer(Consumer):
-    def __init__(self):
+    def __init__(self, env):
+        Consumer.__init__(self, env)
         self.abnormal_size = True
         self.identity      = "abnormal"
 
 
 class SpecialConsumer(Consumer):
-    def __init__(self):
+    def __init__(self, env):
+        Consumer.__init__(self, env)
         self.num_shoes_want = 2
         self.identity       = "special"
 
 
 class WealthyConsumer(Consumer):
-    def __init__(self):
+    def __init__(self, env):
+        Consumer.__init__(self, env)
         self.money       = normal(self.env.rich_mean_money, self.env.rich_std_money)
         self.has_loyalty = random() < self.env.rich_prob_loyal
         self.identity    = "wealthy"
 
 
 class InfluencerConsumer(WealthyConsumer):
-    def __init__(self):
+    def __init__(self, env):
+        WealthyConsumer.__init__(self, env)
         self.identity = "influencer"
 
 
 class ResellerConsumer(Consumer):
-    def __init__(self):
+    def __init__(self, env):
+        Consumer.__init__(self, env)
         #TODO: further define these values
         self.desire         = 0
         self.num_shoes_want = 100
