@@ -18,6 +18,10 @@ class Consumer:
     def printdesire(self):
         print(self.desire)
 
+    
+    def buy_shoes(self):
+        self.env.num_shoes = self.env.num_shoes - 1
+
 
 class AverageConsumer(Consumer):
     pass

@@ -1,5 +1,6 @@
 import consumer
 from shopping_environment import ShoppingEnvironment
+import random
 
 # parameters
 num_shoes        = 100
@@ -23,7 +24,8 @@ env = ShoppingEnvironment(
     rich_std_money = 250,
     average_prob_loyal = 0.5,
     rich_prob_loyal = 0.8,
-    reseller_prob_loyal = 0.9
+    reseller_prob_loyal = 0.9,
+    num_shoes = num_shoes
 )
 
 # create consumers
@@ -35,6 +37,13 @@ influencer_consumers = [consumer.InfluencerConsumer(env) for _ in range(num_infl
 reseller_consumers   = [consumer.ResellerConsumer(env) for _ in range(num_resellers)]
 
 consumers = average_consumers + abnormal_consumers + special_consumers + wealthy_consumers + influencer_consumers + reseller_consumers
-print(type(consumers))
 
+# lottery system
+# everyone gets one pair of shoes
+selected = random.sample(consumers, 100)
+
+for person in selected:
+    person.buy_shoes()
+
+print(env.num_shoes)
 
