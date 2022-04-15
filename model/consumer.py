@@ -45,3 +45,13 @@ class WealthyConsumer(Consumer):
 class InfluencerConsumer(WealthyConsumer):
     def __init__(self):
         self.identity = "influencer"
+
+
+class ResellerConsumer(Consumer):
+    def __init__(self):
+        #TODO: further define these values
+        self.desire         = 0
+        self.num_shoes_want = 100
+        self.money          = 100000
+        self.has_loyalty    = random() < self.env.reseller_prob_loyal
+        self.identity       = "reseller"
