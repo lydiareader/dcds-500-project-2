@@ -27,3 +27,8 @@ class AbnormalConsumer(Consumer):
     def __init__(self):
         self.abnormal_size = True
         self.identity      = "abnormal"
+
+
+class SpecialConsumer(Consumer):
+    def __init__(self):
+        self.num_shoes_want = 2
