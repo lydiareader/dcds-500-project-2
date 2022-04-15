@@ -21,3 +21,9 @@ class Consumer:
 
 class AverageConsumer(Consumer):
     pass
+
+
+class AbnormalConsumer(Consumer):
+    def __init__(self):
+        self.abnormal_size = True
+        self.identity      = "abnormal"
