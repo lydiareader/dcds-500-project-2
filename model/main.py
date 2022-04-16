@@ -1,7 +1,7 @@
 import consumer
 from shopping_environment import ShoppingEnvironment
 import pandas as pd
-from mechanisms import run_lottery_no_gaming
+from mechanisms import run_lottery_no_gaming, run_first_come_no_gaming
 
 # parameters
 num_shoes        = 100
@@ -40,4 +40,5 @@ reseller_consumers   = [consumer.ResellerConsumer(env) for _ in range(num_resell
 
 consumers = average_consumers + abnormal_consumers + special_consumers + wealthy_consumers + influencer_consumers + reseller_consumers
 
-print(run_lottery_no_gaming(consumers))
+df = run_first_come_no_gaming(consumers)
+print(df)

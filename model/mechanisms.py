@@ -11,6 +11,16 @@ def run_lottery_no_gaming(consumers):
     return agents_to_df(consumers)
 
 
+def run_first_come_no_gaming(consumers):
+    
+    sorted_consumers = sorted(consumers, key = lambda c: c.desire, reverse=True)
+
+    for person in sorted_consumers:
+        person.buy_shoes(cap = 2)
+    
+    return agents_to_df(consumers)
+
+
 def agents_to_df(consumers):
     fields = [
             'abnormal_size',
