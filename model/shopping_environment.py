@@ -32,6 +32,7 @@ class ShoppingEnvironment():
 
         self.loyal_consumers = [person for person in self.consumers if person.has_loyalty]
 
+
     def restock(self, num_shoes):
         self.num_shoes = num_shoes
         for person in self.consumers:
@@ -40,6 +41,20 @@ class ShoppingEnvironment():
 
     def run_invitation_no_gaming(self):
         selected = self.influencer_consumers + sample(self.loyal_consumers, 50)
+
+        for person in selected:
+            person.buy_shoes(cap = 2)
+
+    
+    def run_first_come_no_gaming(self):
+        sorted_consumers = sorted(self.consumers, key = lambda c: c.desire, reverse=True)
+
+        for person in sorted_consumers:
+            person.buy_shoes(cap = 2)
+
+
+    def run_lottery_no_gaming(self):
+        selected = sample(self.consumers, 100)
 
         for person in selected:
             person.buy_shoes(cap = 2)
