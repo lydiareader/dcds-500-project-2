@@ -21,6 +21,10 @@ class Consumer:
         self._buy_shoes(min(cap, self.num_shoes_want, self.env.num_shoes))
         #TODO: incorporate money
 
+    
+    def reset(self):
+        self.shoes_acquired = 0
+
 
     def _buy_shoes(self, num_to_buy):
         self.env.num_shoes = self.env.num_shoes - num_to_buy

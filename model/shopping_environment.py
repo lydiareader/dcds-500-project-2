@@ -17,3 +17,9 @@ class ShoppingEnvironment():
         self.reseller_prob_loyal    = reseller_prob_loyal
         self.num_shoes              = num_shoes
         self.price                  = price
+        self.consumers              = []
+
+    def restock(self, num_shoes):
+        self.num_shoes = num_shoes
+        for person in self.consumers:
+            person.reset()
