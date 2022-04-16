@@ -1,11 +1,10 @@
 # Base class for consumer entities
-from shopping_environment import ShoppingEnvironment
 from random import random
 from numpy.random import normal
 
 
 class Consumer:
-    def __init__(self, env: ShoppingEnvironment):
+    def __init__(self, env):
         self.env = env
 
         self.abnormal_size  = False
