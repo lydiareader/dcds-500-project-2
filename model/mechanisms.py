@@ -21,6 +21,8 @@ def run_first_come_no_gaming(consumers):
     return agents_to_df(consumers)
 
 
+
+
 def agents_to_df(consumers):
     fields = [
             'abnormal_size',

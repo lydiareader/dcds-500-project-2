@@ -1,6 +1,7 @@
 # environment for simulation
 import consumer
 from random import sample
+import pandas as pd
 
 class ShoppingEnvironment():
     def __init__(self, mean_desire, std_desire, desire_threshold, average_mean_money, average_std_money, \
@@ -42,3 +43,16 @@ class ShoppingEnvironment():
 
         for person in selected:
             person.buy_shoes(cap = 2)
+
+    
+    def get_consumer_df(self):
+        fields = [
+                'abnormal_size',
+                'desire',
+                'num_shoes_want',
+                'money',
+                'identity',
+                'has_loyalty',
+                'shoes_acquired'
+                ]                
+        return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in self.consumers])
