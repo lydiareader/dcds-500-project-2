@@ -64,7 +64,8 @@ class WealthyConsumer(Consumer):
 class InfluencerConsumer(WealthyConsumer):
     def __init__(self, env):
         WealthyConsumer.__init__(self, env)
-        self.identity = "influencer"
+        self.identity    = "influencer"
+        self.has_loyalty = False    # to simplify invite only mechanism
 
 
 class ResellerConsumer(Consumer):

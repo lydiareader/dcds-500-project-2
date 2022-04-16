@@ -1,5 +1,6 @@
 # environment for simulation
 import consumer
+from random import sample
 
 class ShoppingEnvironment():
     def __init__(self, mean_desire, std_desire, desire_threshold, average_mean_money, average_std_money, \
@@ -28,8 +29,16 @@ class ShoppingEnvironment():
         self.reseller_consumers   = [consumer.ResellerConsumer(self) for _ in range(num_resellers)]
         self.consumers = self.average_consumers + self.abnormal_consumers + self.special_consumers + self.wealthy_consumers + self.influencer_consumers + self.reseller_consumers
 
+        self.loyal_consumers = [person for person in self.consumers if person.has_loyalty]
 
     def restock(self, num_shoes):
         self.num_shoes = num_shoes
         for person in self.consumers:
             person.reset()
+
+
+    def run_invitation_no_gaming(self):
+        selected = self.influencer_consumers + sample(self.loyal_consumers, 50)
+
+        for person in selected:
+            person.buy_shoes(cap = 2)
