@@ -14,6 +14,7 @@ class Consumer:
         self.identity       = "average"
         self.has_loyalty    = random() < self.env.average_prob_loyal
         self.shoes_acquired = 0
+        self.influence      = 0
 
 
     def buy_shoes(self, cap):
@@ -59,6 +60,7 @@ class WealthyConsumer(Consumer):
         self.money       = normal(self.env.rich_mean_money, self.env.rich_std_money)
         self.has_loyalty = random() < self.env.rich_prob_loyal
         self.identity    = "wealthy"
+        self.influence   = 0.5
 
 
 class InfluencerConsumer(WealthyConsumer):
@@ -66,6 +68,7 @@ class InfluencerConsumer(WealthyConsumer):
         WealthyConsumer.__init__(self, env)
         self.identity    = "influencer"
         self.has_loyalty = False    # to simplify invite only mechanism
+        self.influence   = 1
 
 
 class ResellerConsumer(Consumer):
@@ -77,3 +80,4 @@ class ResellerConsumer(Consumer):
         self.money          = 100000
         self.has_loyalty    = random() < self.env.reseller_prob_loyal
         self.identity       = "reseller"
+        self.influence      = 0.5

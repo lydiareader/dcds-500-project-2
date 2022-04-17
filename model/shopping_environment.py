@@ -68,6 +68,7 @@ class ShoppingEnvironment():
                 'money',
                 'identity',
                 'has_loyalty',
+                'influence',
                 'shoes_acquired'
                 ]                
         return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in self.consumers])
