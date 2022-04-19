@@ -15,10 +15,12 @@ class Consumer:
         self.has_loyalty    = random() < self.env.average_prob_loyal
         self.shoes_acquired = 0
         self.influence      = 0
-
+        self.proxy          = self.desire
+        self.got_shoes      = False
 
     def buy_shoes(self, cap):
         self._buy_shoes(min(cap, self.num_shoes_want, self.env.num_shoes))
+        if self.shoes_acquired > 0 : self.got_shoes = True
         #TODO: incorporate money
 
     
@@ -50,8 +52,9 @@ class SpecialConsumer(Consumer):
 
     def buy_shoes(self, cap):
         # special consumer will not buy 1 pair, only 2 pairs
-        if self.env.num_shoes >= 2:     #TODO: incorporate money
+        if self.env.num_shoes >= 2 and cap > 1:     #TODO: incorporate money
             self._buy_shoes(2)
+            self.got_shoes = True
 
 
 class WealthyConsumer(Consumer):
@@ -67,6 +70,7 @@ class InfluencerConsumer(WealthyConsumer):
     def __init__(self, env):
         WealthyConsumer.__init__(self, env)
         self.identity    = "influencer"
+        self.num_shoes_want = 1
         self.has_loyalty = False    # to simplify invite only mechanism
         self.influence   = 1
 
@@ -76,6 +80,7 @@ class ResellerConsumer(Consumer):
         Consumer.__init__(self, env)
         #TODO: further define these values
         self.desire         = 0
+        self.proxy          = normal(self.env.mean_desire, self.env.std_desire)
         self.num_shoes_want = 100
         self.money          = 100000
         self.has_loyalty    = random() < self.env.reseller_prob_loyal

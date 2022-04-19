@@ -1,0 +1,51 @@
+	Consumer utility	Seller utility	average_num_got_shoes	average_percent_got_shoes	average_shoes_bought	average_shoes_per_person	abnormal_num_got_shoes	abnormal_percent_got_shoes	abnormal_shoes_bought	abnormal_shoes_per_person	special_num_got_shoes	special_percent_got_shoes	special_shoes_bought	special_shoes_per_person	wealthy_num_got_shoes	wealthy_percent_got_shoes	wealthy_shoes_bought	wealthy_shoes_per_person	influencer_num_got_shoes	influencer_percent_got_shoes	influencer_shoes_bought	influencer_shoes_per_person	reseller_num_got_shoes	reseller_percent_got_shoes	reseller_shoes_bought	reseller_shoes_per_person
+lottery_no_gaming	0.418593231	0.158267717	391	0.043444444	587	0.065222222	46	0.046	68	0.068	20	0.08	40	0.16	45	0.045	62	0.062	23	0.046	23	0.046	110	0.044	220	0.088
+first_no_gaming	0.897412905	0.083707025	511	0.056777778	776	0.086222222	57	0.057	80	0.08	14	0.056	28	0.112	62	0.062	91	0.091	25	0.05	25	0.05	0	0	0	0
+invite_no_gaming	0.458981578	0.693890274	166	0.018444444	255	0.028333333	16	0.016	24	0.024	7	0.028	14	0.056	34	0.034	49	0.049	500	1	500	1	79	0.0316	158	0.0632
+lottery_with_gaming	0.094189979	0.420801527	66	0.007333333	97	0.010777778	11	0.011	14	0.014	7	0.028	14	0.056	9	0.009	15	0.015	1	0.002	1	0.002	430	0.172	859	0.3436
+first_with_gaming	0.423336122	0.326512456	182	0.020222222	277	0.030777778	18	0.018	23	0.023	7	0.028	14	0.056	25	0.025	39	0.039	12	0.024	12	0.024	318	0.1272	635	0.254
+invite_with_gaming	0.391720628	0.76	83	0.009222222	123	0.013666667	14	0.014	22	0.022	0	0	0	0	6	0.006	9	0.009	500	1	502	1.004	172	0.0688	344	0.1376
+lottery_cap1_with_gaming	0.102155388	0.412060302	163	0.018111111	163	0.018111111	19	0.019	19	0.019	0	0	0	0	19	0.019	19	0.019	7	0.014	7	0.014	787	0.3148	787	0.3148
+lottery_authen_with_gaming	0.203737724	0.3330373	177	0.019666667	257	0.028555556	18	0.018	30	0.03	4	0.016	8	0.032	18	0.018	25	0.025	11	0.022	11	0.022	335	0.134	669	0.2676
+lottery_authen_cap1_with_gaming	0.193456286	0.350806452	293	0.032555556	293	0.032555556	28	0.028	28	0.028	0	0	0	0	24	0.024	24	0.024	25	0.05	25	0.05	622	0.2488	622	0.2488
+combined_distribution_with_gaming	0.428622775	0.620639535	122	0.013555556	184	0.020444444	14	0.014	20	0.02	3	0.012	6	0.024	9	0.009	14	0.014	305	0.61	307	0.614	235	0.094	469	0.1876
+																										
+																										
+lottery no game																										
+	# people get shoes	% people get shoes	# shoes they get	shoe per person																						
+Average 	391	0.043444444	587	0.065222222																						
+Abnormal	46	0.046	68	0.068																						
+Special	20	0.08	40	0.16																						
+Wealthy	45	0.045	62	0.062																						
+Influencer	23	0.046	23	0.046																						
+Reseller	110	0.044	220	0.088																						
+																										
+																										
+first no game																										
+	# people get shoes	% people get shoes	# shoes they get	shoe per person																						
+Average 	511	0.056777778	776	0.086222222																						
+Abnormal	57	0.057	80	0.08																						
+Special	14	0.056	28	0.112																						
+Wealthy	62	0.062	91	0.091																						
+Influencer	25	0.05	25	0.05																						
+Reseller	0	0	0	0																						
+																										
+																										
+invite no game																										
+	# people get shoes	% people get shoes	# shoes they get	shoe per person																						
+Average 	166	0.018444444	255	0.028333333																						
+Abnormal	16	0.016	24	0.024																						
+Special	7	0.028	14	0.056																						
+Wealthy	34	0.034	49	0.049																						
+Influencer	500	1	500	1																						
+Reseller	79	0.0316	158	0.0632																						
+																										
+																										
+lottery with gaming																										
+	# people get shoes	% people get shoes	# shoes they get	shoe per person																						
+Average 	66	0.007333333	97	0.010777778																						
+Abnormal	11	0.011	14	0.014																						
+Special	7	0.028	14	0.056																						
+Wealthy	9	0.009	15	0.015																						
+Influencer	1	0.002	1	0.002																						
+Reseller	430	0.172	859	0.3436																						
