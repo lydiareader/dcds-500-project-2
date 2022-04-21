@@ -50,7 +50,21 @@ class ShoppingEnvironment():
     def restock_without_reset(self, num_shoes):
         self.num_shoes = num_shoes
 
+    ## No Gaming ----------------------------------------------------------------------------------
+    def run_lottery_no_gaming(self, cap = 2):
+        selected = sample(self.consumers, 1000)
 
+        for person in selected:
+            person.buy_shoes(cap = cap)
+            
+    
+    def run_first_come_no_gaming(self):
+        sorted_consumers = sorted(self.consumers, key = lambda c: c.desire, reverse=True)
+
+        for person in sorted_consumers:
+            person.buy_shoes(cap = 2)
+
+    
     def run_invitation_no_gaming(self):
         selected = self.influencer_consumers + sample(self.loyal_consumers, 500)
 
@@ -58,19 +72,20 @@ class ShoppingEnvironment():
             person.buy_shoes(cap = 2)
 
 
+    ## No Gaming ----------------------------------------------------------------------------------
+    def run_lottery_with_gaming(self, cap = 2):
+        selected = sample(self.gaming_consumers, 1000)
+
+        for person in selected:
+            person.buy_shoes(cap = cap)
+
+    
     def run_invitation_with_gaming(self):
         num_fakes = self.num_resellers * 7
         gaming_consumers = self.loyal_consumers + sample(self.fake_resellers, num_fakes)
         selected = self.influencer_consumers + sample(gaming_consumers,500)
 
         for person in selected:
-            person.buy_shoes(cap = 2)
-
-
-    def run_first_come_no_gaming(self):
-        sorted_consumers = sorted(self.consumers, key = lambda c: c.desire, reverse=True)
-
-        for person in sorted_consumers:
             person.buy_shoes(cap = 2)
 
 
@@ -83,23 +98,11 @@ class ShoppingEnvironment():
             person.buy_shoes(cap = cap)
 
 
-    def run_lottery_no_gaming(self, cap = 2):
-        selected = sample(self.consumers, 1000)
-
-        for person in selected:
-            person.buy_shoes(cap = cap)
-
-
-    def run_lottery_with_gaming(self, cap = 2):
-        selected = sample(self.gaming_consumers, 1000)
-
-        for person in selected:
-            person.buy_shoes(cap = cap)
-
-
+    ## Authentication ----------------------------------------------------------------------------------
     def run_lottery_with_gaming_auth(self, cap = 2):
         num_fakes = self.num_resellers * 7
-        selected = sample(self.gaming_consumers_auth, 1000)
+        fakers = sample(self.fake_resellers, num_fakes)
+        selected = sample(self.gaming_consumers_auth + fakers, 1000)
 
         for person in selected:
             person.buy_shoes(cap = cap)
@@ -132,49 +135,3 @@ class ShoppingEnvironment():
                 'got_shoes'
                 ]                
         return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in self.gaming_consumers])
-
-    def get_fake_df_firstcome(self):
-        fields = [
-                'abnormal_size',
-                'desire',
-                'num_shoes_want',
-                'money',
-                'identity',
-                'has_loyalty',
-                'influence',
-                'shoes_acquired',
-                'got_shoes'
-                ]                
-        return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in self.gaming_consumers_firstcome])
-    
-
-    def get_fake_df_auth(self):
-        fields = [
-                'abnormal_size',
-                'desire',
-                'num_shoes_want',
-                'money',
-                'identity',
-                'has_loyalty',
-                'influence',
-                'shoes_acquired',
-                'got_shoes'
-                ]                
-        return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in self.gaming_consumers_auth])
-
-
-    def get_real_fake_df(self):
-        fakers = self.fake_resellers_auth + self.fake_loyal_consumer + self.fake_resellers_firstcome + self.fake_resellers
-        consumer_set = self.consumers + fakers
-        fields = [
-                'abnormal_size',
-                'desire',
-                'num_shoes_want',
-                'money',
-                'identity',
-                'has_loyalty',
-                'influence',
-                'shoes_acquired',
-                'got_shoes'
-                ]                
-        return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in consumer_set]) 
