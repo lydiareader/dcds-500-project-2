@@ -36,8 +36,6 @@ class ShoppingEnvironment():
 
         self.loyal_consumers = [person for person in self.consumers if person.has_loyalty]
 
-        self.fake_resellers_auth = [consumer.ResellerConsumer(self) for _ in range(num_resellers * 7 ) ]
-        self.gaming_consumers_auth = self.consumers + self.fake_resellers_auth
 
     def restock(self, num_shoes):
         self.num_shoes = num_shoes
@@ -50,6 +48,7 @@ class ShoppingEnvironment():
     def restock_without_reset(self, num_shoes):
         self.num_shoes = num_shoes
 
+
     ## No Gaming ----------------------------------------------------------------------------------
     def run_lottery_no_gaming(self, cap = 2):
         selected = sample(self.consumers, 1000)
@@ -58,18 +57,18 @@ class ShoppingEnvironment():
             person.buy_shoes(cap = cap)
             
     
-    def run_first_come_no_gaming(self):
+    def run_first_come_no_gaming(self, cap = 2):
         sorted_consumers = sorted(self.consumers, key = lambda c: c.desire, reverse=True)
 
         for person in sorted_consumers:
-            person.buy_shoes(cap = 2)
+            person.buy_shoes(cap = cap)
 
     
-    def run_invitation_no_gaming(self):
+    def run_invitation_no_gaming(self, cap = 2):
         selected = self.influencer_consumers + sample(self.loyal_consumers, 500)
 
         for person in selected:
-            person.buy_shoes(cap = 2)
+            person.buy_shoes(cap = cap)
 
 
     ## No Gaming ----------------------------------------------------------------------------------
@@ -80,13 +79,13 @@ class ShoppingEnvironment():
             person.buy_shoes(cap = cap)
 
     
-    def run_invitation_with_gaming(self):
+    def run_invitation_with_gaming(self, cap = 2):
         num_fakes = self.num_resellers * 7
         gaming_consumers = self.loyal_consumers + sample(self.fake_resellers, num_fakes)
         selected = self.influencer_consumers + sample(gaming_consumers,500)
 
         for person in selected:
-            person.buy_shoes(cap = 2)
+            person.buy_shoes(cap = cap)
 
 
     def run_first_come_with_gaming(self, cap = 2):
@@ -102,7 +101,7 @@ class ShoppingEnvironment():
     def run_lottery_with_gaming_auth(self, cap = 2):
         num_fakes = self.num_resellers * 7
         fakers = sample(self.fake_resellers, num_fakes)
-        selected = sample(self.gaming_consumers_auth + fakers, 1000)
+        selected = sample(self.consumers + fakers, 1000)
 
         for person in selected:
             person.buy_shoes(cap = cap)
