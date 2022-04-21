@@ -9,6 +9,7 @@ python = "^3.10"
 numpy = "^1.22.3"
 pandas = "^1.4.2"
 ipykernel = "^6.13.0"
+hvplot = "^0.7.3"
 
 [tool.poetry.dev-dependencies]
 
