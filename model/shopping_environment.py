@@ -33,6 +33,9 @@ class ShoppingEnvironment():
         self.consumers = self.average_consumers + self.abnormal_consumers + self.special_consumers + self.wealthy_consumers + self.influencer_consumers + self.reseller_consumers
 
         self.main_accounts = [person.main_account for person in self.consumers]
+        self.fake_accounts = []
+        for person in self.consumers:
+            self.fake_accounts = self.fake_accounts + person.fake_accounts
 
 
         self.fake_resellers = [consumer.ResellerConsumer(self) for _ in range(num_resellers * 20)]
@@ -77,10 +80,10 @@ class ShoppingEnvironment():
 
     ## No Gaming ----------------------------------------------------------------------------------
     def run_lottery_with_gaming(self, cap = 2):
-        selected = sample(self.gaming_consumers, 1000)
+        selected = sample(self.fake_accounts + self.main_accounts, 1000)
 
-        for person in selected:
-            person.buy_shoes(cap = cap)
+        for account in selected:
+            account.person.buy_shoes(cap = cap)
 
     
     def run_invitation_with_gaming(self, cap = 2):
