@@ -38,17 +38,13 @@ class ShoppingEnvironment():
             self.fake_accounts = self.fake_accounts + person.fake_accounts
 
 
-        self.fake_resellers = [consumer.ResellerConsumer(self) for _ in range(num_resellers * 20)]
-        self.gaming_consumers = self.consumers + self.fake_resellers
-
-        self.loyal_consumers = [person for person in self.consumers if person.has_loyalty]
+        self.loyal_main_accounts = [account for account in self.main_accounts if account.has_loyalty]
+        self.loyal_fake_accounts = [account for account in self.fake_accounts if account.has_loyalty]
 
 
     def restock(self, num_shoes):
         self.num_shoes = num_shoes
         for person in self.consumers:
-            person.reset()
-        for person in self.fake_resellers:
             person.reset()
     
 
@@ -72,10 +68,12 @@ class ShoppingEnvironment():
 
     
     def run_invitation_no_gaming(self, cap = 2):
-        selected = self.influencer_consumers + sample(self.loyal_consumers, 500)
-
-        for person in selected:
+        for person in self.influencer_consumers:
             person.buy_shoes(cap = cap)
+        
+        selected = sample(self.loyal_main_accounts, 500)
+        for account in selected:
+            account.person.buy_shoes(cap = cap)
 
 
     ## No Gaming ----------------------------------------------------------------------------------
@@ -87,12 +85,12 @@ class ShoppingEnvironment():
 
     
     def run_invitation_with_gaming(self, cap = 2):
-        num_fakes = self.num_resellers * 7
-        gaming_consumers = self.loyal_consumers + sample(self.fake_resellers, num_fakes)
-        selected = self.influencer_consumers + sample(gaming_consumers,500)
-
-        for person in selected:
+        for person in self.influencer_consumers:
             person.buy_shoes(cap = cap)
+        
+        selected = sample(self.loyal_fake_accounts, 500)
+        for account in selected:
+            account.person.buy_shoes(cap = cap)
 
 
     def run_first_come_with_gaming(self, cap = 2):
@@ -126,18 +124,3 @@ class ShoppingEnvironment():
                 'shoes_acquired'
                 ]                
         return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in self.consumers])
-
-
-    def get_fake_df(self):
-        fields = [
-                'abnormal_size',
-                'desire',
-                'num_shoes_want',
-                'money',
-                'identity',
-                'has_loyalty',
-                'influence',
-                'shoes_acquired',
-                'got_shoes'
-                ]                
-        return pd.DataFrame([{field: getattr(person, field) for field in fields} for person in self.gaming_consumers])

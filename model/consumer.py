@@ -80,14 +80,15 @@ class WealthyConsumer(Consumer):
         if self.shoes_acquired > 0 : self.got_shoes = True
 
 
-class InfluencerConsumer(WealthyConsumer):
+class InfluencerConsumer(AverageConsumer):
     def __init__(self, env):
-        WealthyConsumer.__init__(self, env)
-        self.identity       = "influencer"
-        self.num_shoes_want = 1
-        self.has_loyalty    = False    # to simplify invite only mechanism
-        self.influence      = 1
-        self.fake_accounts  = []       # influencers do not create fake accounts
+        AverageConsumer.__init__(self, env)
+        self.identity                 = "influencer"
+        self.num_shoes_want           = 1
+        self.main_account.has_loyalty = False    # to simplify invite only mechanism
+        self.influence                = 1
+        self.fake_accounts            = []       # influencers do not create fake accounts
+        self.influence                = 0.5
 
 
 class ResellerConsumer(Consumer):
