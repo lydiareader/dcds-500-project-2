@@ -22,9 +22,8 @@ class Consumer:
         self.main_account   = accounts.Account(self)
 
     def buy_shoes(self, cap):
-        self._buy_shoes(min(cap, self.num_shoes_want, self.env.num_shoes))
+        self._buy_shoes(min(cap, self.num_shoes_want - self.shoes_acquired, self.env.num_shoes))
         if self.shoes_acquired > 0 : self.got_shoes = True
-        #TODO: incorporate money
 
     
     def reset(self):
@@ -55,7 +54,7 @@ class SpecialConsumer(Consumer):
 
     def buy_shoes(self, cap):
         # special consumer will not buy 1 pair, only 2 pairs
-        if self.env.num_shoes >= 2 and cap > 1:     #TODO: incorporate money
+        if self.env.num_shoes >= 2 and cap > 1 and self.shoes_acquired < 2:
             self._buy_shoes(2)
             self.got_shoes = True
 
