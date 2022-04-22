@@ -20,6 +20,9 @@ class Consumer:
         self.got_shoes      = False
         self.prob_loyal     = self.env.average_prob_loyal
         self.main_account   = accounts.Account(self)
+        self.fake_accounts  = [accounts.Account(self)] if self.num_shoes_want > 1 else []
+
+        self.authorized_fake_accounts = []
 
     def buy_shoes(self, cap):
         self._buy_shoes(min(cap, self.num_shoes_want - self.shoes_acquired, self.env.num_shoes))
@@ -62,25 +65,34 @@ class SpecialConsumer(Consumer):
 class WealthyConsumer(Consumer):
     def __init__(self, env):
         Consumer.__init__(self, env)
-        self.money       = normal(self.env.rich_mean_money, self.env.rich_std_money)
-        self.has_loyalty = random() < self.env.rich_prob_loyal
-        self.identity    = "wealthy"
-        self.influence   = 0.5
+        self.money          = normal(self.env.rich_mean_money, self.env.rich_std_money)
+        self.has_loyalty    = random() < self.env.rich_prob_loyal
+        self.identity       = "wealthy"
+        self.influence      = 0.5
+        self.fake_accounts  = [accounts.Account(self)]  # wealthy always have at least one fake account
+        
+        if self.num_shoes_want > 1:
+            self.fake_accounts.append(accounts.Account(self))
+
+
+    def buy_shoes(self, cap):
+        self._buy_shoes(min(cap, self.num_shoes_want + 1 - self.shoes_acquired, self.env.num_shoes))
+        if self.shoes_acquired > 0 : self.got_shoes = True
 
 
 class InfluencerConsumer(WealthyConsumer):
     def __init__(self, env):
         WealthyConsumer.__init__(self, env)
-        self.identity    = "influencer"
+        self.identity       = "influencer"
         self.num_shoes_want = 1
-        self.has_loyalty = False    # to simplify invite only mechanism
-        self.influence   = 1
+        self.has_loyalty    = False    # to simplify invite only mechanism
+        self.influence      = 1
+        self.fake_accounts  = []       # influencers do not create fake accounts
 
 
 class ResellerConsumer(Consumer):
     def __init__(self, env):
         Consumer.__init__(self, env)
-        #TODO: further define these values
         self.desire         = 0
         self.proxy          = normal(self.env.mean_desire, self.env.std_desire)
         self.num_shoes_want = 100
@@ -88,3 +100,5 @@ class ResellerConsumer(Consumer):
         self.has_loyalty    = random() < self.env.reseller_prob_loyal
         self.identity       = "reseller"
         self.influence      = 0.5
+        self.authorized_fake_accounts = [accounts.Account(self) for _ in range(7)]     # 20 fake accounts total
+        self.fake_accounts = self.authorized_fake_accounts + [accounts.Account(self) for _ in range(13)]
