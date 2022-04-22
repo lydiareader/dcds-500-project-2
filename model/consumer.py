@@ -1,6 +1,7 @@
 # Base class for consumer entities
 from random import random
 from numpy.random import normal
+import accounts
 
 
 class Consumer:
@@ -17,6 +18,8 @@ class Consumer:
         self.influence      = 0
         self.proxy          = self.desire
         self.got_shoes      = False
+        self.prob_loyal     = self.env.average_prob_loyal
+        self.main_account   = accounts.Account(self)
 
     def buy_shoes(self, cap):
         self._buy_shoes(min(cap, self.num_shoes_want, self.env.num_shoes))

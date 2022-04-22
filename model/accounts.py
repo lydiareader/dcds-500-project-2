@@ -1,5 +1,6 @@
 from random import random
 
-class Accounts:
-    def __init__(self, loyalty_prob):
-        self.has_loyalty    = random() < loyalty_prob
+class Account:
+    def __init__(self, person):
+        self.has_loyalty    = random() < person.prob_loyal
+        self.person         = person 
