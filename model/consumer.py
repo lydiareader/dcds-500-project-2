@@ -70,6 +70,7 @@ class WealthyConsumer(Consumer):
         self.identity       = "wealthy"
         self.influence      = 0.5
         self.fake_accounts  = [accounts.Account(self)]  # wealthy always have at least one fake account
+        self.proxy          = self.proxy + 0.1
         
         if self.num_shoes_want > 1:
             self.fake_accounts.append(accounts.Account(self))
@@ -101,5 +102,5 @@ class ResellerConsumer(Consumer):
         self.has_loyalty    = random() < self.env.reseller_prob_loyal
         self.identity       = "reseller"
         self.influence      = 0.5
-        self.authorized_fake_accounts = [accounts.Account(self) for _ in range(7)]     # 20 fake accounts total
+        self.authenticated_fakes = [accounts.Account(self) for _ in range(7)]     # 20 fake accounts total
         self.fake_accounts = self.authorized_fake_accounts + [accounts.Account(self) for _ in range(13)]

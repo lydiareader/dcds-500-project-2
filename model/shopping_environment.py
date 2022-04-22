@@ -40,6 +40,9 @@ class ShoppingEnvironment():
 
         self.loyal_main_accounts = [account for account in self.main_accounts if account.has_loyalty]
         self.loyal_fake_accounts = [account for account in self.fake_accounts if account.has_loyalty]
+        self.authenticated_fakes = []
+        for reseller in self.reseller_consumers:
+            self.authenticated_fakes = self.authenticated_fakes + reseller.authenticated_fakes
 
 
     def restock(self, num_shoes):
@@ -94,22 +97,21 @@ class ShoppingEnvironment():
 
 
     def run_first_come_with_gaming(self, cap = 2):
-        num_fakes = self.num_resellers * 5
-        gaming_consumers = self.consumers + sample(self.fake_resellers, num_fakes)
-        sorted_consumers = sorted(gaming_consumers, key = lambda c: c.proxy, reverse=True)
+        sorted_consumers = sorted(self.consumers, key = lambda c: c.proxy, reverse=True)
         
         for person in sorted_consumers:
-            person.buy_shoes(cap = cap)
+            if person.identity == 'reseller':
+                person.buy_shoes(cap = cap * 5)
+            else:
+                person.buy_shoes(cap)
 
 
     ## Authentication ----------------------------------------------------------------------------------
     def run_lottery_with_gaming_auth(self, cap = 2):
-        num_fakes = self.num_resellers * 7
-        fakers = sample(self.fake_resellers, num_fakes)
-        selected = sample(self.consumers + fakers, 1000)
+        selected = sample(self.main_accounts + self.authenticated_fakes, 1000)
 
-        for person in selected:
-            person.buy_shoes(cap = cap)
+        for account in selected:
+            account.person.buy_shoes(cap = cap)
 
 
     def get_consumer_df(self):
